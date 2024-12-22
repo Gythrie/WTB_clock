@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12-Hour Digital Clock</title>
+</head>
+<body>
+    <style>
+        body {
+          font-family: sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+          background-color: #1a1a1a;
+          background-image: url('https://media.istockphoto.com/id/1487963070/vector/futuristic-time-clock-hand-and-clock-face-digital-transformation-abstract-technology.jpg?s=612x612&w=0&k=20&c=vBMcZmwTPz_ofcnAAOQroZr4EIa5BfOIbnkqgIUoxxk=');
+          background-size: cover;
+          background-position: center center;
+          color: #070000;
+        }
+    
+        .clock {
+          background-color: #6373b9a6;
+          border-radius: 10px;
+          padding: 20px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+          margin-left: -900px;
+          float: left;
+        }
+    
+        .time {
+          font-size: 4rem;
+          text-align: center;
+          margin-bottom: 15px;
+        }
+    
+        .date {
+          font-size: 1.2rem;
+          text-align: center;
+        }
+      </style>
+    </head>
+    <body>
+    
+      <div class="clock">
+        <div class="time" id="time"></div>
+        <div class="date" id="date"></div>
+      </div>
+    
+      <script>
+        function updateClock() {
+          const now = new Date();
+    
+          // Get hours, minutes, and seconds in 12-hour format
+          let hours = now.getHours() % 12 || 12;
+          const minutes = String(now.getMinutes()).padStart(2, '0');
+          const seconds = String(now.getSeconds()).padStart(2, '0');
+          const ampm = now.getHours() >= 12 ? 'PM' : 'AM';
+    
+          // Get date in "Month Day, Year" format
+          const options = { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' };
+          const dateString = now.toLocaleDateString('en-US', options);
+    
+          // Display time and date
+          document.getElementById('time').textContent = `${hours}:${minutes}:${seconds} ${ampm}`;
+          document.getElementById('date').textContent = dateString;
+        }
+    
+        // Update clock every second
+        setInterval(updateClock, 1000);
+    
+        // Initial call to update clock
+        updateClock();
+      </script>
+</body>
+</html>
